@@ -3,10 +3,13 @@ CFLAGS=-Wall -Wextra -O3
 BIN=xa
 DIR="${HOME}/.bins/"
 
-build: main.c
-	$(CC) $(CFLAGS) -o $(BIN) main.c
+SRC=$(wildcard *.c)
+HDR=$(wildcard *.h)
 
-clean: xa
+build: $(SRC) $(HDR)
+	$(CC) $(CFLAGS) -o $(BIN) $(SRC)
+
+clean:
 	rm -f $(BIN)
 
 install: build
