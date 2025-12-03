@@ -5,6 +5,7 @@
 
 #define MAX_IN_SIZE  1024
 #define MAX_CMD_SIZE 4096
+#define PLACEHOLDER  "%s"
 
 int run_command(char *cmd);
 
@@ -47,7 +48,7 @@ int main(int argc, char *argv[]) {
   }
 
   char built_cmd[MAX_CMD_SIZE] = {0};
-  char *p = strstr(cmd, "%s");
+  char *p = strstr(cmd, PLACEHOLDER);
 
   /*
     if the placeholder string is not found, then simply execute what's in argv
