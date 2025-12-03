@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/wait.h>
+#include "error.h"
 
 #define MAX_IN_SIZE  1024
 #define MAX_CMD_SIZE 4096
@@ -33,10 +34,8 @@ int main(int argc, char *argv[]) {
     we want to build the cmd string, using argv values concatenated
   */
   for (int i = 1; i < argc; i++) {
-    if (strlen(cmd) + strlen(argv[i]) + 2 >= MAX_CMD_SIZE) {
-      fprintf(stderr, "err: command too long\n");
-      return 1;
-    }
+    if (strlen(cmd) + strlen(argv[i]) + 2 >= MAX_CMD_SIZE)
+      fatal("command too long");
 
     /*
       append argv[i] to the cmd being built, and if there're still other
