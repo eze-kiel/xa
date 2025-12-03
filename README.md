@@ -10,6 +10,12 @@ cd ./xa
 make
 ```
 
+## Usage
+
+```
+echo /etc/passwd | xa cat %s
+```
+
 ## License
 
 MIT
