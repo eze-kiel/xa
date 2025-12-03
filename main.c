@@ -26,6 +26,7 @@ int main(int argc, char *argv[]) {
 
   /*
     if we do not have any argument, we want to run stdin as it
+    TODO: do we?
   */
   if (argc == 1)
     return run_command(input);
