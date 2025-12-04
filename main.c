@@ -74,7 +74,7 @@ int run_command(char *cmd) {
   if (pid < 0)
     fatal("parent process fork failed");
 
-  if (pid  == 0 ) {
+  if (pid  == 0) {
       /*
         as cmd is a single string, we need to properly split it to use
         exec()-like functions.
