@@ -1,3 +1,5 @@
+#include <unistd.h>
+#include <wordexp.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -68,8 +70,23 @@ int main(int argc, char *argv[]) {
 }
 
 int run_command(char *cmd) {
-  int status = system(cmd);
-  if (WIFEXITED(status))
-    return WEXITSTATUS(status);
-  return 1;
+  pid_t pid = fork();
+  if (pid < 0)
+    fatal("parent process fork failed");
+
+  if (pid  == 0 ) {
+      /*
+        as cmd is a single string, we need to properly split it to use
+        exec()-like functions.
+        to do so without breaking quoting, it's possible to use wordexp that is
+        a sort of shell tokenizer
+      */
+      wordexp_t w;
+      wordexp(cmd, &w, 0);
+      execvp(w.we_wordv[0], w.we_wordv);
+      fatal("child exec failed");
+  }
+  int status = 0;
+  waitpid(pid, &status, 0);
+  return status;
 }
