@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -O3
+CFLAGS=-Wall -Wextra -pedantic -Werror -O3
 BIN=xa
 DIR="${HOME}/.bins/"
 
