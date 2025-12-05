@@ -5,6 +5,7 @@
 #include <string.h>
 #include <sys/wait.h>
 #include "error.h"
+#include "help.h"
 
 #define MAX_IN_SIZE  1024
 #define MAX_CMD_SIZE 4096
@@ -13,6 +14,15 @@
 int run_command(char *cmd);
 
 int main(int argc, char *argv[]) {
+  int c;
+  while ((c = getopt(argc, argv, "h")) != -1 ) {
+    switch (c) {
+      case 'h':
+        show_help();
+        return 0;
+    }
+  }
+
   char input[MAX_IN_SIZE] = {0};
   char cmd[MAX_CMD_SIZE] = {0};
 
