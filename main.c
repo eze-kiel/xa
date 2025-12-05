@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
   char cmd[MAX_CMD_SIZE] = {0};
 
   if (!fgets(input, sizeof input, stdin))
-    return 1;
+    fatal("failed to read from stdin");
 
   /*
     fgets reads until \n, and preserves it so we clean it here
